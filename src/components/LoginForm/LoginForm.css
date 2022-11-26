@@ -1,0 +1,34 @@
+.login-form-container {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: blackhite;
+    border: rgba(255, 255, 255, 0.588) solid 5px;
+    padding: 50px;
+    background-color: #fef5ed;
+  
+    background-image: linear-gradient(175deg, rgba(0, 0, 0, 0) 95%, #00dbde 95%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 95%, #fc00ff 95%),
+      linear-gradient(175deg, rgba(0, 0, 0, 0) 90%, #6284ff 90%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 92%, #00dbde 92%),
+      linear-gradient(175deg, rgba(0, 0, 0, 0) 85%, #fc00ff 85%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 89%, #6284ff 89%),
+      linear-gradient(175deg, rgba(0, 0, 0, 0) 80%, #00dbde 80%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 86%, #fc00ff 86%),
+      linear-gradient(175deg, rgba(0, 0, 0, 0) 75%, #6284ff 75%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 83%, #00dbde 83%),
+      linear-gradient(175deg, rgba(0, 0, 0, 0) 70%, #fc00ff 70%),
+      linear-gradient(85deg, rgba(0, 0, 0, 0) 80%, #6284ff 80%);
+    padding: 10px;
+    box-shadow: 15px 20px;
+    border-radius: 25px;
+    border: 4px solid black;
+  }
+  
+  .login-btn {
+    margin-top: 15px;
+  }
+  
