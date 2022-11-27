@@ -3,8 +3,10 @@ import NavBar from "./components/NavBar/NavBar";
 import React, { Component } from "react";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import { Route, Routes, Navigate } from "react-router-dom";
-
 import CreateAwallet from './pages/CreateWallet/CreateAwallet'
+import YourWallets from './pages/YourWallets/YourWallets'
+import AllWallets from './pages/AllWallets/AllWallets'
+
 
 class App extends Component {
   state = {
@@ -58,8 +60,8 @@ class App extends Component {
         {this.state.user ? (
           <Routes>
             <Route path="/createAwallet" element={<CreateAwallet />} />
-            <Route path="/yourWallets" element={<CreateAwallet />} />
-            <Route path="/allWallets" element={<CreateAwallet />} />
+            <Route path="/yourWallets" element={<YourWallets user={this.state.user} />} />
+            <Route path="/allWallets" element={<AllWallets />} />
             <Route
               path="*"
               element={<Navigate to="/createAwallet" replace />}

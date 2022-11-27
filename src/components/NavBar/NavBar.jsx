@@ -26,13 +26,13 @@ export default class NavBar extends Component {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to="/createAwallet" className="rm-underline">
+                    <Link to="/yourWallets" className="rm-underline">
                       Your Wallets
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to="/createAwallet" className="rm-underline">
+                    <Link to="/allWallets" className="rm-underline">
                       All Available Wallets
                     </Link>
                   </NavDropdown.Item>

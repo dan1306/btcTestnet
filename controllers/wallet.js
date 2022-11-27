@@ -1,8 +1,24 @@
 const fetch = require("node-fetch");
 const Wallet = require("../models/wallet");
 
+
+async function yourWallets(req, res) {
+
+
+  Wallet.find({ userID: req.user._id }, (err, yourWallets) => {
+    if (err) {
+      res.status(400).json(err)
+    } else {
+      console.log(yourWallets)
+      res.status(200).json(yourWallets)
+    }
+  })
+  
+}
+
+
 async function createWallet(req, res) {
-  console.log(req.user)
+  console.log(req.user);
 
   let data = {
     method: "POST",
@@ -32,7 +48,6 @@ async function createWallet(req, res) {
 
   let fetchResponse2 = await fetch(url2, data2);
 
-
   let walletCreated = await fetchResponse2.json();
 
   if (!fetchResponse2.ok) {
@@ -56,4 +71,5 @@ async function createWallet(req, res) {
 
 module.exports = {
   createWallet,
+  yourWallets
 };
