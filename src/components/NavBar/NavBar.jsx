@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,13 +13,21 @@ export default class NavBar extends Component {
     return (
       <Navbar bg="light" expand="lg" className="nav-color">
         <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand>React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {userState ? (
               <Nav className="ms-auto">
+                <NavDropdown title="Wallets" id="basic-nav-dropdown">
+                  <NavDropdown.Item>
+                    <Link to="/createAwallet" className="rm-underline">
+                      Create A Wallet
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                </NavDropdown>
+
                 <Nav.Link
-                  href="#home"
                   onClick={async () => {
                     logout();
                   }}

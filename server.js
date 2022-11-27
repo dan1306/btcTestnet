@@ -47,6 +47,8 @@ app.use(express.static(path.join(__dirname, "build")));
 
 
 app.use("/api/user", require("./routes/api/user"));
+app.use("/api/wallet", require("./routes/api/wallet"));
+
 
 
 app.post("/generateAddress", async (req, res) => {

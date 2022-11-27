@@ -1,15 +1,15 @@
-import './App.css';
-import NavBar from './components/NavBar/NavBar';
+import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
 import React, { Component } from "react";
-import AuthPage from './pages/AuthPage/AuthPage';
+import AuthPage from "./pages/AuthPage/AuthPage";
+import { Route, Routes, Navigate } from "react-router-dom";
 
-
+import CreateAwallet from './pages/CreateWallet/CreateAwallet'
 
 class App extends Component {
   state = {
     user: null,
     showLogin: true,
-
   };
 
   componentDidMount = () => {
@@ -42,13 +42,11 @@ class App extends Component {
     await this.setState({ showLogin: true });
   };
 
-
   setUserInState = (incomingUserData) => {
     this.setState({ user: incomingUserData });
   };
 
-
-  render() { 
+  render() {
     return (
       <div className="App">
         <NavBar
@@ -56,26 +54,25 @@ class App extends Component {
           logout={this.logout}
           Signup={this.Signup}
           LogIn={this.LogIn}
-
         />
-        {
-          this.state.user ? (
-          
-            <h1>
-              You are logged In
-          </h1>
-            
-          ) : (
-            <AuthPage
+        {this.state.user ? (
+          <Routes>
+            <Route path="/createAwallet" element={<CreateAwallet />} />
+
+            <Route
+              path="*"
+              element={<Navigate to="/createAwallet" replace />}
+            />
+          </Routes>
+        ) : (
+          <AuthPage
             showLogin={this.state.showLogin}
             setUserInState={this.setUserInState}
           />
-          )
-        }
-
+        )}
       </div>
     );
-  } 
+  }
 }
 
 export default App;
