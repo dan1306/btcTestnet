@@ -7,6 +7,7 @@ const walletSchema = new Schema({
   address: { type: String },
   wif: { type: String },
   name: { type: String },
+  userID: { type: String },
 });
 
 module.exports = mongoose.model("Wallet", walletSchema);

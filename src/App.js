@@ -58,7 +58,8 @@ class App extends Component {
         {this.state.user ? (
           <Routes>
             <Route path="/createAwallet" element={<CreateAwallet />} />
-
+            <Route path="/yourWallets" element={<CreateAwallet />} />
+            <Route path="/allWallets" element={<CreateAwallet />} />
             <Route
               path="*"
               element={<Navigate to="/createAwallet" replace />}

@@ -4,33 +4,53 @@ import "./CreateWallet.css";
 export default class createWallet extends Component {
   state = {
     walletName: "",
+    err: null,
   };
 
-  handleChange = (e) => {
+  handleChange = async (e) => {
+    if (this.state.err) {
+      await this.setState({err: null})
+    }
     const { name, value } = e.target;
 
     this.setState({ [name]: value });
   };
 
   handleSubmit = async (evt) => {
-      evt.preventDefault();
-      
-      try {
-        const data = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                walletName: this.state.walletName
-            }),
-          };
-          const fetchResponse = await fetch("/api/wallet/createWallet", data);
+    evt.preventDefault();
 
-      } catch (err) {
-        console.log( err);
+    try {
+      let jwt = localStorage.getItem("token");
+      console.log(jwt);
+      const data = {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + jwt,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          walletName: this.state.walletName,
+        }),
+      };
+      const fetchResponse = await fetch("/api/wallet/createWallet", data);
+      let returnedData = await fetchResponse.json();
+
+      if (!fetchResponse.ok) {
+        console.log("daniel", returnedData);
+
+        await this.setState({ err: returnedData.error });
+        return;
+      } else {
+        await this.setState({ err: null });
+        return
       }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
+    const { err } = this.state;
     return (
       <div className="pad createWallet">
         <div className="creatInnerDiv">
@@ -53,6 +73,13 @@ export default class createWallet extends Component {
               </button>
             </div>
           </form>
+          {err ? (
+            <>
+              <h3 className="text-center red">{err}</h3>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );
