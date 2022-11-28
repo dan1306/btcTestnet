@@ -183,14 +183,17 @@ export default class WalletDetail extends Component {
                             {val.inputs.map((inp, index) => {
                               return (
                                 <div className="inputOutoutDiv">
-                                  <h5>
-                                    {" "}
-                                    {String(
-                                      inp.output_value / Math.pow(10, 8)
-                                    )}{" "}
-                                    BTC From
-                                  </h5>
-                                  <h4> {inp.addresses[0]} (output)</h4>
+                                  <p>
+                                    <span className="btcFrom">
+                                      {" "}
+                                      {String(
+                                        inp.output_value / Math.pow(10, 8)
+                                      )}{" "}
+                                      BTC
+                                    </span>{" "}
+                                    From
+                                  </p>
+                                  <p className="btcAddresss"> {inp.addresses[0]}</p>
                                 </div>
                               );
                             })}
@@ -209,10 +212,14 @@ export default class WalletDetail extends Component {
                             {val.outputs.map((out, index) => {
                               return (
                                 <div className="inputOutoutDiv">
-                                  <h5>
-                                    {String(out.value / Math.pow(10, 8))} BTC To
-                                  </h5>
-                                  <h4>{out.addresses[0]}</h4>
+                                  <p>
+                                    <span className="btcFrom">
+                                      {" "}
+                                      {String(out.value / Math.pow(10, 8))} BTC
+                                    </span>{" "}
+                                    To
+                                  </p>
+                                  <p className="btcAddresss">{out.addresses[0]}</p>
                                 </div>
                               );
                             })}
