@@ -1,6 +1,9 @@
 import { Component } from "react";
 import "./WalletDetails.css";
 import QRCode from "react-qr-code";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt, faLockAlt } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 export default class WalletDetail extends Component {
   state = {
@@ -94,7 +97,7 @@ export default class WalletDetail extends Component {
           <>
             <div className="addreHeader">
               <h6 className="btc">₿ Bitcoin Testnet Address</h6>
-              <h5 className="btcaddre">mzhxo3HtY1Wc2o3w5aFUYFpm3soGVhPZp6</h5>
+              <h5 className="btcaddre">..................................</h5>
             </div>
             <div className="mainDiv row">
               <div className="col-4 wallDetail">
@@ -113,24 +116,28 @@ export default class WalletDetail extends Component {
             <div className="text-center">
               <QRCode value="NOADDRESSTOLOOKFOR" size="150" />
             </div>
+            <div>
+              <p>0 Transactions</p>
+            </div>
             <div className="mainDiv transactionDIV">
               <div>
                 {" "}
-                <p className="lock">🔒</p>
+                <p className="lock">
+                  {" "}
+                  <i class="fa-solid fa-lock-open"></i> 0/0 confirmations
+                </p>
               </div>
               <div className="text-center">
-                <p>
-                  ⇄3deac05428903a4f13dc170968a71755817e0b490b378780d166280f26b1c1cb
-                </p>
+                <p>⇄</p>
               </div>
               <div className=" row ">
                 <div className="col-5 wallDetail">
                   <div className="text-center">
-                    <p>1 Input Consumed</p>
+                    <p>0 Input Consumed</p>
                   </div>
                   <div className="inputOutoutDiv">
-                    <h5>5.2991902 BTC from</h5>
-                    <h4>tb1q5q39j2tr9d35zku9f02n2ufk5jn3ff8npze2y3 (output)</h4>
+                    <h5></h5>
+                    <h4> </h4>
                   </div>
                 </div>
                 <div className="col-2 wallDetail arrow">
@@ -140,17 +147,20 @@ export default class WalletDetail extends Component {
                 <div className="col-5 wallDetail">
                   {" "}
                   <div className="text-center">
-                    <p>2 Outputs Created</p>
+                    <p>0 Outputs Created</p>
                   </div>
                   <div className="inputOutoutDiv">
-                    <h5>5.2991902 BTC from</h5>
-                    <h4> 2MxwcTaSmVEwBkvpaU5Zj74CLYJ4aN4CyjW (unspent)</h4>
+                    <h5></h5>
+                    <h4></h4>
                   </div>{" "}
                   <div className="inputOutoutDiv">
-                    <h5>5.2991902 BTC from</h5>
-                    <h4> 2MxwcTaSmVEwBkvpaU5Zj74CLYJ4aN4CyjW (unspent)</h4>
+                    <h5></h5>
+                    <h4></h4>
                   </div>
                 </div>
+              </div>
+              <div className="text-center">
+                <h6>Value Transacted : 0 BTC</h6>
               </div>
             </div>
           </>
