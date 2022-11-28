@@ -1,9 +1,6 @@
 import { Component } from "react";
 import "./WalletDetails.css";
 import QRCode from "react-qr-code";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faLockAlt } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 
 export default class WalletDetail extends Component {
   state = {
@@ -69,7 +66,8 @@ export default class WalletDetail extends Component {
                     )}{" "}
                     BTC
                   </h4>
-                  {this.state.adressObj["unconfirmed_balance"] > 0 ? (
+                  {this.state.adressObj["unconfirmed_balance"] > 0 ||
+                  this.state.adressObj["unconfirmed_balance"] < 0 ? (
                     <p className="text-center">
                       ({" "}
                       {String(
@@ -104,14 +102,76 @@ export default class WalletDetail extends Component {
                   {this.state.adressObj["txs"].map((val, index) => {
                     return (
                       <div className="mainDiv transactionDIV">
-                        <div>
-                          {" "}
-                          <p className="lock">
+                        {val.confirmations === 0 ? (
+                          <div>
                             {" "}
-                            <i class="fa-solid fa-lock-open"></i> 0/0
-                            confirmations
-                          </p>
-                        </div>
+                            <p className="lock">
+                              {" "}
+                              <i
+                                class="fa-solid fa-lock-open"
+                                style={{ color: "red" }}
+                              ></i>{" "}
+                              <span style={{ color: "red" }}>
+                                {String(val.confirmations)}/6{" "}
+                              </span>
+                              confirmations
+                            </p>
+                          </div>
+                        ) : (
+                          <>
+                            {val.confirmations > 0 && val.confirmations < 6 ? (
+                              <div>
+                                {" "}
+                                <p className="lock">
+                                  {" "}
+                                  <i
+                                    class="fa-solid fa-lock-open"
+                                    style={{ color: "#8B8000" }}
+                                  ></i>{" "}
+                                  <span style={{ color: "#8B8000" }}>
+                                    {String(val.confirmations)}/6{" "}
+                                  </span>
+                                  confirmations
+                                </p>
+                              </div>
+                            ) : (
+                              <>
+                                {val.confirmations === 6 ? (
+                                  <div>
+                                    {" "}
+                                    <p className="lock">
+                                      {" "}
+                                      <i
+                                        class="fa-solid fa-lock"
+                                        style={{ color: "green" }}
+                                      ></i>{" "}
+                                      <span style={{ color: "green" }}>
+                                        {String(val.confirmations)}/6
+                                      </span>{" "}
+                                      confirmations
+                                    </p>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    {" "}
+                                    <p className="lock">
+                                      {" "}
+                                      <i
+                                        class="fa-solid fa-lock"
+                                        style={{ color: "green" }}
+                                      ></i>{" "}
+                                      <span style={{ color: "green" }}>
+                                        6+{" "}
+                                      </span>
+                                      confirmations
+                                    </p>
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </>
+                        )}
+
                         <div className="text-center">
                           <p>⇄ {val.hash}</p>
                         </div>
@@ -210,7 +270,6 @@ export default class WalletDetail extends Component {
                     <p>0 Input Consumed</p>
                   </div>
                   <div className="inputOutoutDiv">
-                    <h5></h5>
                     <h4> </h4>
                   </div>
                 </div>
@@ -223,14 +282,8 @@ export default class WalletDetail extends Component {
                   <div className="text-center">
                     <p>0 Outputs Created</p>
                   </div>
-                  <div className="inputOutoutDiv">
-                    <h5></h5>
-                    <h4></h4>
-                  </div>{" "}
-                  <div className="inputOutoutDiv">
-                    <h5></h5>
-                    <h4></h4>
-                  </div>
+                  <div className="inputOutoutDiv"></div>{" "}
+                  <div className="inputOutoutDiv"></div>
                 </div>
               </div>
               <div className="text-center">
