@@ -1,20 +1,25 @@
 .padWalDiv {
-    /* padding: 30px; */
-    margin-bottom: 50px;
-    border: 3px solid red;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 50px;
+  border: 3px solid black;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
   }
   
-  .yourWallDiv {
-    border: 1px solid black;
-      padding: 10px;
+  .allWallDiv {
+    border: 3px solid black;
+    padding: 10px;
     box-shadow: 5px 10px #888888;
     border-radius: 15px;
   
-    background-color: #fff;
-    background-image:
-    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-    linear-gradient(#eee .1em, transparent .1em);
-    background-size: 100% 1.2em;
+    background: linear-gradient(#ffffff 50%, rgba(255, 255, 255, 0) 0) 0 0,
+      radial-gradient(circle closest-side, #ffffff 53%, rgba(255, 255, 255, 0) 0)
+        0 0,
+      radial-gradient(circle closest-side, #ffffff 50%, rgba(255, 255, 255, 0) 0)
+        55px 0 #48b;
+    background-size: 110px 200px;
+    background-repeat: repeat-x;
   }
   
   .truncate {

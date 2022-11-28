@@ -37,10 +37,10 @@ export default class createWallet extends Component {
     return (
       <>
         {this.state.yourWallets.length > 0 ? (
-          <div className="row padWalDiv">
+          <div className="row padWalletDiv">
             {this.state.yourWallets.map((wallet, id) => {
               return (
-                <div className="yourWallDiv col-lg-4 col-md-6 col-sm-12">
+                <div className="yourWalletDiv col-lg-4 col-md-6 col-sm-12">
                   <h3 className="text-center walletName">
                     Wallet Name: {wallet.name}
                   </h3>

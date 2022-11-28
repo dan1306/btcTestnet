@@ -70,16 +70,16 @@ export default class createWallet extends Component {
               />
             </div>
             {this.state.submitted ? (
-              <>
+              <div className="text-center">
                 <Link to="/yourWallets">
-                  <button className="btn btn-success wallBtn">
+                  <button className="btn btn-success">
                     View Your Wallets
                   </button>
                 </Link>
-              </>
+              </div>
             ) : (
-              <div>
-                <button type="submit" class="btn btn-primary spaceOut">
+              <div className="text-center">
+                <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
               </div>
@@ -88,13 +88,13 @@ export default class createWallet extends Component {
           
           {err ? (
             <>
-              <h3 className="text-center red">{err}</h3>
+              <h3 className="text-center err">{err}</h3>
             </>
           ) : (
               <>
                 {
                   this.state.submitted ? (
-                    <h3 className="text-center green">Wallet Created</h3>
+                    <h3 className="text-center success">Wallet Created</h3>
 
                   ):(<> </>)
                 }

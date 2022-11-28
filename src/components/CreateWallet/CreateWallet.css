@@ -3,44 +3,62 @@
 }
 
 .createWallet {
-  /* min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: black; */
+  margin-bottom: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
 }
 
 .creatInnerDiv {
   margin: 30px;
+  box-shadow: 5px 10px #888888;
+
   border-radius: 10px;
-  border: 4px dashed #00dbde;
+  border: 4px solid black;
   background-color: #fef5ed;
   padding: 20px;
-  background-image: linear-gradient(175deg, rgba(0, 0, 0, 0) 95%, #00dbde 95%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 95%, #fc00ff 95%),
-    linear-gradient(175deg, rgba(0, 0, 0, 0) 90%, #6284ff 90%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 92%, #00dbde 92%),
-    linear-gradient(175deg, rgba(0, 0, 0, 0) 85%, #fc00ff 85%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 89%, #6284ff 89%),
-    linear-gradient(175deg, rgba(0, 0, 0, 0) 80%, #00dbde 80%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 86%, #fc00ff 86%),
-    linear-gradient(175deg, rgba(0, 0, 0, 0) 75%, #6284ff 75%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 83%, #00dbde 83%),
-    linear-gradient(175deg, rgba(0, 0, 0, 0) 70%, #fc00ff 70%),
-    linear-gradient(85deg, rgba(0, 0, 0, 0) 80%, #6284ff 80%);
+  background: radial-gradient(black 3px, transparent 4px),
+    radial-gradient(black 3px, transparent 4px),
+    linear-gradient(#fff 4px, transparent 0),
+    linear-gradient(
+      45deg,
+      transparent 74px,
+      transparent 75px,
+      #a4a4a4 75px,
+      #a4a4a4 76px,
+      transparent 77px,
+      transparent 109px
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75px,
+      transparent 76px,
+      #a4a4a4 76px,
+      #a4a4a4 77px,
+      transparent 78px,
+      transparent 109px
+    ),
+    #fff;
+  background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
 
 .spaceOut {
   margin-top: 30px !important;
 }
 
-.red{
+.err {
   color: red;
 }
 
-.green{
+.success {
   color: green;
+}
 
+.btnDiv{
+  text-align: center;
 }
