@@ -1,10 +1,15 @@
 .mainDiv{
     padding: 40px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     
 }
 
 .wallDetail{
+    border: 3px solid #D8D8D8;
+    background-color: #EFF5F5;
+}
+
+.transactionDetails{
     border: 3px solid #EDEDED;
     background-color: #EDEDED;
 }
@@ -15,6 +20,10 @@
 
 .amnt{
     font-weight: bold;
+}
+
+.amntTransactions{
+    font-size: 27px;
 }
 
 .red{

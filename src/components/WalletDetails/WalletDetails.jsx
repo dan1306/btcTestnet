@@ -35,6 +35,10 @@ export default class WalletDetail extends Component {
       <>
         {this.props.address && this.state.adressObj ? (
           <>
+            <div className="addreHeader">
+              <h6 className="btc">₿ Bitcoin Testnet Address</h6>
+              <h5 className="btcaddre">{this.state.adressObj["address"]}</h5>
+            </div>
             <div className="mainDiv ">
               <div className="row">
                 <div className="col-4 wallDetail">
@@ -87,11 +91,81 @@ export default class WalletDetail extends Component {
             ) : (
               <></>
             )}
-            <div className="row">
-              <div className="col-4"> asas </div>
-              <div className="col-4"> asas </div>
-              <div className="col-4"> asas </div>
+            <div>
+              <p className="amntTransactions">
+                {this.state.adressObj["final_n_tx"]} Transactions
+                {" ("}
+                {this.state.adressObj["unconfirmed_n_tx"]} unconfirmed{")"}
+              </p>
             </div>
+            <>
+              {this.state.adressObj["txs"].length > 0 ? (
+                <>
+                  {this.state.adressObj["txs"].map((val, index) => {
+                    return (
+                      <div className="mainDiv transactionDIV">
+                        <div>
+                          {" "}
+                          <p className="lock">
+                            {" "}
+                            <i class="fa-solid fa-lock-open"></i> 0/0
+                            confirmations
+                          </p>
+                        </div>
+                        <div className="text-center">
+                          <p>⇄ {val.hash}</p>
+                        </div>
+                        <div className=" row ">
+                          <div className="col-5 transactionDetails">
+                            <div className="text-center">
+                              <p>{String(val.inputs.length)} Input Consumed</p>
+                            </div>
+                            {val.inputs.map((inp, index) => {
+                              return (
+                                <div className="inputOutoutDiv">
+                                  <h5>
+                                    {" "}
+                                    {String(
+                                      inp.output_value / Math.pow(10, 8)
+                                    )}{" "}
+                                    BTC From
+                                  </h5>
+                                  <h4> {inp.addresses[0]} (output)</h4>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div className="col-2 transactionDetails arrow">
+                            {" "}
+                            <h1>&#8594;</h1>{" "}
+                          </div>
+                          <div className="col-5 transactionDetails">
+                            {" "}
+                            <div className="text-center">
+                              <p>
+                                {String(val.outputs.length)} Outputs Created
+                              </p>
+                            </div>
+                            {val.outputs.map((out, index) => {
+                              return (
+                                <div className="inputOutoutDiv">
+                                  <h5>
+                                    {String(out.value / Math.pow(10, 8))} BTC To
+                                  </h5>
+                                  <h4>{out.addresses[0]}</h4>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              ) : (
+                <></>
+              )}
+            </>
           </>
         ) : (
           <>
@@ -131,7 +205,7 @@ export default class WalletDetail extends Component {
                 <p>⇄</p>
               </div>
               <div className=" row ">
-                <div className="col-5 wallDetail">
+                <div className="col-5 transactionDetails">
                   <div className="text-center">
                     <p>0 Input Consumed</p>
                   </div>
@@ -140,11 +214,11 @@ export default class WalletDetail extends Component {
                     <h4> </h4>
                   </div>
                 </div>
-                <div className="col-2 wallDetail arrow">
+                <div className="col-2 transactionDetails arrow">
                   {" "}
                   <h1>&#8594;</h1>{" "}
                 </div>
-                <div className="col-5 wallDetail">
+                <div className="col-5 transactionDetails">
                   {" "}
                   <div className="text-center">
                     <p>0 Outputs Created</p>

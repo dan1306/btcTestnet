@@ -6,7 +6,7 @@ async function addressDetails(req, res) {
 
   try {
     let addr = req.params.addrs
-    let fetchResponse = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?before=300000`)
+    let fetchResponse = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`)
     fetchResponse = await fetchResponse.json()
     res.status(200).json(fetchResponse)
   } catch (e) {
