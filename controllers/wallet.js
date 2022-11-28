@@ -4,10 +4,15 @@ const Wallet = require("../models/wallet");
 async function addressDetails(req, res) {
   console.log(req.params.addrs)
 
-  
-  let fetchResponse = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${req.params.addrs}/full?before=300000`)
-  fetchResponse = await fetchResponse.json()
-  res.status(200).json(fetchResponse)
+  try {
+    let addr = req.params.addrs
+    let fetchResponse = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?before=300000`)
+    fetchResponse = await fetchResponse.json()
+    res.status(200).json(fetchResponse)
+  } catch (e) {
+    res.status(400).json(e)
+  }
+
 }
 
 
