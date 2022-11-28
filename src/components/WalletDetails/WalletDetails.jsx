@@ -33,24 +33,43 @@ export default class WalletDetail extends Component {
           <div className="mainDiv row">
             <div className="col-4 wallDetail">
               <p className="text-center">RECEIVED</p>
-              <h4 className="text-center amnt">0.000000 BTC</h4>
+              <h4 className="text-center amnt">
+                {String(
+                  Number(this.state.adressObj["total_received"]) /
+                    Math.pow(10, 8)
+                )}{" "}
+                BTC
+              </h4>
             </div>
             <div className="col-4 wallDetail">
               <p className="text-center">SENT</p>
-              <h4 className="text-center amnt">0.000000 BTC</h4>
+              <h4 className="text-center amnt">
+                {String(
+                  Number(this.state.adressObj["total_sent"]) / Math.pow(10, 8)
+                )}{" "}
+                BTC
+              </h4>
             </div>
             <div className="col-4 wallDetail">
               <p className="text-center">BALANCE</p>
               <h4 className="text-center amnt">
                 {String(
-                  Number(this.state.adressObj["balance"]) * Math.pow(10, 8)
+                  Number(this.state.adressObj["balance"]) / Math.pow(10, 8)
                 )}{" "}
                 BTC
               </h4>
-              <p className="text-center">{String(
-                  Number(this.state.adressObj["unconfirmed_balance"]) * Math.pow(10, 8)
-                )} {" "} BTC UNCONFIRMED</p>
-              (0.01922257 BTC UNCONFIRMED)
+              {this.state.adressObj["unconfirmed_balance"] > 0 ? (
+                <p className="text-center">
+                  ({" "}
+                  {String(
+                    Number(this.state.adressObj["unconfirmed_balance"]) /
+                      Math.pow(10, 8)
+                  )}{" "}
+                  BTC UNCONFIRMED)
+                </p>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         ) : (
