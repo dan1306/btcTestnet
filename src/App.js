@@ -6,12 +6,15 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import CreateAwallet from './pages/CreateWallet/CreateAwallet'
 import YourWallets from './pages/YourWallets/YourWallets'
 import AllWallets from './pages/AllWallets/AllWallets'
+import WalletDetails from "./pages/WalletDetails/WalletDetails";
+
 
 
 class App extends Component {
   state = {
     user: null,
     showLogin: true,
+    walletDetail: null
   };
 
   componentDidMount = () => {
@@ -48,6 +51,14 @@ class App extends Component {
     this.setState({ user: incomingUserData });
   };
 
+  detailAdress = async (addre) => {
+    if (this.state.walletDetail) {
+      await this.setState({walletDetail: null})
+    }
+    await this.setState({walletDetail: addre})
+
+  }
+
   render() {
     return (
       <div className="App">
@@ -60,8 +71,9 @@ class App extends Component {
         {this.state.user ? (
           <Routes>
             <Route path="/createAwallet" element={<CreateAwallet />} />
-            <Route path="/yourWallets" element={<YourWallets user={this.state.user} />} />
+            <Route path="/yourWallets" element={<YourWallets user={this.state.user} detailAdress = {this.detailAdress} />} />
             <Route path="/allWallets" element={<AllWallets />} />
+            <Route path="/walletDetails" element={<WalletDetails address = {this.state.walletDetail}  />} />
             <Route
               path="*"
               element={<Navigate to="/createAwallet" replace />}

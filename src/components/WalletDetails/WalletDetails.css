@@ -1,0 +1,16 @@
+.mainDiv{
+    padding: 20px;
+}
+
+.wallDetail{
+    border: 3px solid #D8D8D8;
+    background-color: #EFF5F5;
+}
+
+.text-center{
+    margin: 20px;
+}
+
+.amnt{
+    font-weight: bold;
+}

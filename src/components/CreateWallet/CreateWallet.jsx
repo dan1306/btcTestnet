@@ -1,15 +1,17 @@
 import { Component } from "react";
 import "./CreateWallet.css";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export default class createWallet extends Component {
   state = {
     walletName: "",
     err: null,
+    submitted: false,
   };
 
   handleChange = async (e) => {
     if (this.state.err) {
-      await this.setState({err: null})
+      await this.setState({ err: null });
     }
     const { name, value } = e.target;
 
@@ -41,8 +43,8 @@ export default class createWallet extends Component {
         await this.setState({ err: returnedData.error });
         return;
       } else {
-        await this.setState({ err: null });
-        return
+        await this.setState({ err: null, submitted: true  });
+        return;
       }
     } catch (err) {
       console.log(err);
@@ -67,18 +69,36 @@ export default class createWallet extends Component {
                 required
               />
             </div>
-            <div>
-              <button type="submit" class="btn btn-primary spaceOut">
-                Submit
-              </button>
-            </div>
+            {this.state.submitted ? (
+              <>
+                <Link to="/yourWallets">
+                  <button className="btn btn-success wallBtn">
+                    View Your Wallets
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <div>
+                <button type="submit" class="btn btn-primary spaceOut">
+                  Submit
+                </button>
+              </div>
+            )}
           </form>
+          
           {err ? (
             <>
               <h3 className="text-center red">{err}</h3>
             </>
           ) : (
-            <></>
+              <>
+                {
+                  this.state.submitted ? (
+                    <h3 className="text-center green">Wallet Created</h3>
+
+                  ):(<> </>)
+                }
+            </>
           )}
         </div>
       </div>

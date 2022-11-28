@@ -6,7 +6,7 @@ export default class yourWallets extends Component {
     return (
       <div className="mainDiv">
         {" "}
-        <YourWallets />
+        <YourWallets detailAdress={this.props.detailAdress } />
       </div>
     );
   }
