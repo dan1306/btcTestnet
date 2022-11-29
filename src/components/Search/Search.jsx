@@ -1,4 +1,5 @@
 import { Component } from "react";
+import SearchDetails from "../SearchDetails/SearchDetails";
 import "./Search.css";
 
 export default class SearchForm extends Component {
@@ -14,15 +15,28 @@ export default class SearchForm extends Component {
     await this.setState({ [name]: value, submitted: false });
   };
 
-    handleSubmit = async (evt) => {
-      
-        try {
-            
-        } catch (e) {
-            
-        }
+  handleSubmit = async (evt) => {
     evt.preventDefault();
-    await this.setState({ pubAddress: "daniel", submitted: true });
+
+    try {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          addrs: this.state.pubAddress,
+        }),
+      };
+      let fetchResponse = await fetch("/api/search/searchAddre", options);
+
+      console.log(fetchResponse.ok);
+
+      fetchResponse = await fetchResponse.json();
+      await this.setState({ jsonDetials: fetchResponse, submitted: true });
+      return;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
   };
 
   render() {
@@ -52,7 +66,29 @@ export default class SearchForm extends Component {
         </div>
 
         <div>
-          {this.state.submitted ? <h1>{this.state.pubAddress}</h1> : <></>}
+          <>
+            {this.state.submitted ? (
+              <>
+                {this.state.jsonDetials.error ? (
+                  <div className="errorDiv">
+                    <p className="errTxt text-center">
+                      {this.state.jsonDetials.error}
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    {this.state.jsonDetials["adressObj"] ? (
+                      <SearchDetails Details={this.state.jsonDetials} address= {this.state.pubAddress} />
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+          </>
         </div>
       </div>
     );

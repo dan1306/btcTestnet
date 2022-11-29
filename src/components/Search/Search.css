@@ -18,3 +18,17 @@
     linear-gradient(#d9afd9 50%, transparent 50%);
   background-size: 50px 50px;
 }
+
+.errorDiv{
+    margin: 20px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    padding: 20px; 
+    box-shadow: 10px 15px #888888;
+   
+}
+
+.errTxt{
+    color:red;
+    font-size: larger;
+    font-weight: bold;
+}
