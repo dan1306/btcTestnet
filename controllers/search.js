@@ -25,8 +25,10 @@ async function searchAddress(req, res) {
         findAddr = await findAddr.save();
         console.log(fetchResponse);
         let obj = {
+          newData: false,
+
           updated: true,
-          minutesPassed: minPassed,
+          minutesPassed: 0,
           dataFromAdderss: findAddr,
         };
 
@@ -38,6 +40,7 @@ async function searchAddress(req, res) {
       }
     } else {
       let obj = {
+        newData: false,
         updated: false,
         minutesPassed: minPassed,
         dataFromAdderss: findAddr,
@@ -56,7 +59,14 @@ async function searchAddress(req, res) {
       searchField.address = addr;
       searchField.data = fetchResponse;
       searchField.save();
-      return res.status(200).json(searchField);
+      let obj = {
+        newData: true,
+        updated: false,
+        minutesPassed: 0,
+        dataFromAdderss: searchField,
+      };
+
+      return res.status(200).json(obj);
     } else {
       fetchResponse = await fetchResponse.json();
 
