@@ -13,7 +13,7 @@ async function searchAddress(req, res) {
 
     let minPassed = (Math.abs(tim2 - tim1) / 36e5) * 60;
 
-    if (minPassed > 1) {
+    if (minPassed > 2) {
       let fetchResponse = await fetch(
         `https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`
       );
@@ -61,7 +61,7 @@ async function searchAddress(req, res) {
       searchField.save();
       let obj = {
         newData: true,
-        updated: false,
+        updated: true,
         minutesPassed: 0,
         adressObj: searchField,
       };
@@ -75,6 +75,39 @@ async function searchAddress(req, res) {
   }
 }
 
+async function editAddress(req, res) {
+    console.log("zzzz", req.body.addrs)
+  let addr = req.body.addrs;
+
+  let findAddr = await Search.findOne({ address: addr });
+
+  let fetchResponse = await fetch(
+    `https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`
+  );
+  if (fetchResponse.ok) {
+    fetchResponse = await fetchResponse.json();
+
+    findAddr.data = fetchResponse;
+    findAddr.updatedAt = new Date();
+    findAddr = await findAddr.save();
+    // console.log(fetchResponse);
+    let obj = {
+      newData: false,
+
+      updated: true,
+      minutesPassed: 0,
+      adressObj: findAddr,
+    };
+
+    res.status(200).json(obj);
+  } else {
+    fetchResponse = await fetchResponse.json();
+
+    return res.status(400).json(fetchResponse);
+  }
+}
+
 module.exports = {
-  searchAddress,
+    searchAddress,
+    editAddress
 };

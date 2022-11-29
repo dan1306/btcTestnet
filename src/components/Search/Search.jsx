@@ -6,7 +6,8 @@ export default class SearchForm extends Component {
   state = {
     submitted: false,
     pubAddress: "",
-    jsonDetials: null,
+      jsonDetials: null,
+    
   };
 
   handleChange = async (e) => {

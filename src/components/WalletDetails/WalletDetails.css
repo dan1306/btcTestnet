@@ -99,3 +99,7 @@
 .lockclr {
   color: blue;
 }
+
+.hash{
+  overflow-wrap: break-word;
+}

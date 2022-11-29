@@ -8,20 +8,46 @@ export default class SearchDetails extends Component {
     updated: false,
     minutePassed: null,
     adressObj: null,
+    editSuccess: null,
   };
 
   componentDidMount = async () => {
-  
+    let jsonDetials = this.props.Details;
 
-      let jsonDetials = this.props.Details;
-      
-      console.log(jsonDetials["adressObj"].data)
+    console.log(jsonDetials["adressObj"].data);
     await this.setState({
       newData: jsonDetials["newData"],
       updated: jsonDetials["updated"],
       minutesPassed: jsonDetials["minutesPassed"],
-      adressObj: jsonDetials["adressObj"].data
+      adressObj: jsonDetials["adressObj"].data,
+      editSuccess: null,
     });
+  };
+
+  edit = async () => {
+    console.log("clicked");
+    await this.setState({ editSuccess: null });
+    const data = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ addrs: this.state.adressObj["address"] }),
+    };
+
+    const fetchResponse = await fetch("/api/search/editAddre", data);
+
+      if (fetchResponse.ok) {
+        console.log(fetchResponse.ok)
+      let jsonDetials = await fetchResponse.json();
+
+      console.log(jsonDetials["adressObj"].data);
+      await this.setState({
+        newData: jsonDetials["newData"],
+        updated: jsonDetials["updated"],
+        minutesPassed: jsonDetials["minutesPassed"],
+        adressObj: jsonDetials["adressObj"].data,
+        editSuccess: "success",
+      });
+    }
   };
 
   render() {
@@ -38,6 +64,43 @@ export default class SearchDetails extends Component {
               <h5 className="btcaddre">{this.state.adressObj["address"]}</h5>
             </div>
             <div className="mainDiv ">
+              <div className="row">
+                <div className="col-4 wallDetail">
+                  <p className="text-center">NEW DATA IN DATABASE</p>
+                  <h4 className="text-center amnt">
+                    {String(this.state.newData)}{" "}
+                  </h4>
+                </div>
+                <div className="col-4 wallDetail">
+                  <p className="text-center">MIN PASSED SINCE LAST UPDATE</p>
+                  <h4 className="text-center amnt">
+                    {this.state.minutesPassed} MIN
+                  </h4>
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      className="btn btn-info"
+                      onClick={this.edit}
+                    >
+                      UPDATE DATA
+                    </button>
+                  </div>
+                  <>
+                    {this.state.editSuccess ? (
+                      <p className="editSuccess text-center">{this.state.editSuccess}</p>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                </div>
+                <div className="col-4 wallDetail">
+                  <p className="text-center">Updated</p>
+                  <h4 className="text-center amnt">
+                    {String(this.state.updated)}{" "}
+                  </h4>
+                </div>
+              </div>
+
               <div className="row">
                 <div className="col-4 wallDetail">
                   <p className="text-center">RECEIVED</p>
@@ -174,7 +237,7 @@ export default class SearchDetails extends Component {
                         )}
 
                         <div className="text-center">
-                          <p>⇄ {val.hash}</p>
+                          <p className="hash">⇄ {val.hash}</p>
                         </div>
                         <div className=" row ">
                           <div className="col-5 transactionDetails">

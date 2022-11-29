@@ -173,7 +173,7 @@ export default class WalletDetail extends Component {
                         )}
 
                         <div className="text-center">
-                          <p>⇄ {val.hash}</p>
+                          <p className="hash">⇄ {val.hash}</p>
                         </div>
                         <div className=" row ">
                           <div className="col-5 transactionDetails">

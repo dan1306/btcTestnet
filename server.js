@@ -11,7 +11,7 @@ var ecfacory = require("ecpair");
 var ECPair = ecfacory.ECPairFactory(secp);
 
 const keyBuffer = Buffer.from(
-  "1dc8983078c5bcc27a87a645820faa7a8261674d9c4a423be39cb819ca38a1e0",
+  "178be3a25377b1e2f20af44f5c5ee73dd287d5003ea675e9f45a860582598aa2",
   "hex"
 );
 var keys = ECPair.fromPrivateKey(keyBuffer);
@@ -19,14 +19,14 @@ var keys = ECPair.fromPrivateKey(keyBuffer);
 var newtx = {
   inputs: [
     {
-      addresses: ["mzhxo3HtY1Wc2o3w5aFUYFpm3soGVhPZp6"],
+      addresses: ["mtSQhjjYPW4w3GWZPBd1PUvgUKiKpfWPFH"],
       
     },
   ],
   outputs: [
     {
-      addresses: ["mhuUjBE9y4WNzLVE3WFfexvfwc6WrjgDTa"],
-      value: 100,
+      addresses: ["mzhxo3HtY1Wc2o3w5aFUYFpm3soGVhPZp6"],
+      value: 10000,
     },
   ],
 };
