@@ -49,6 +49,7 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use("/api/user", require("./routes/api/user"));
 app.use(require("./config/auth"));
 app.use("/api/wallet", require("./routes/api/wallet"));
+app.use("/api/search", require("./routes/api/search"));
 
 app.use(express.static(path.join(__dirname, "build")));
 
