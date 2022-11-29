@@ -18,6 +18,14 @@ export default class NavBar extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             {userState ? (
               <Nav className="ms-auto">
+                <NavDropdown title="Search And Send" id="basic-nav-dropdown">
+                  <NavDropdown.Item>
+                    <Link to="/searchAndSend" className="rm-underline">
+                      Search
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+
                 <NavDropdown title="Wallets" id="basic-nav-dropdown">
                   <NavDropdown.Item>
                     <Link to="/createAwallet" className="rm-underline">

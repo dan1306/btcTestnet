@@ -7,6 +7,7 @@ import CreateAwallet from './pages/CreateWallet/CreateAwallet'
 import YourWallets from './pages/YourWallets/YourWallets'
 import AllWallets from './pages/AllWallets/AllWallets'
 import WalletDetails from "./pages/WalletDetails/WalletDetails";
+import Search from "./pages/Search/Search";
 
 
 
@@ -74,9 +75,12 @@ class App extends Component {
             <Route path="/yourWallets" element={<YourWallets user={this.state.user} detailAdress = {this.detailAdress} />} />
             <Route path="/allWallets" element={<AllWallets detailAdress = {this.detailAdress} />} />
             <Route path="/walletDetails" element={<WalletDetails address = {this.state.walletDetail}  />} />
+            <Route path="/searchAndSend" element={<Search  />} />
+
+            
             <Route
               path="*"
-              element={<Navigate to="/createAwallet" replace />}
+              element={<Navigate to="/searchAndSend" replace />}
             />
           </Routes>
         ) : (
