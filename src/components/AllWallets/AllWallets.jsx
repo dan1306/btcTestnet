@@ -80,7 +80,7 @@ export default class createWallet extends Component {
             })}
           </div>
         ) : (
-          <div className="padWalDiv text-center">
+          <div className="noWalDiv text-center">
             <h1>No Wallets To Show</h1>
           </div>
         )}
