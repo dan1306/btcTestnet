@@ -141,3 +141,9 @@
   .form-control{
     margin: 10px 0;
   }
+
+  .transactErrDiv{
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    border: 2px solid black;
+    padding: 15px 0;
+  }

@@ -2,7 +2,6 @@ const fetch = require("node-fetch");
 var bitcoin = require("bitcoinjs-lib");
 var secp = require("tiny-secp256k1");
 var ecfacory = require("ecpair");
-const Wallet = require("../models/wallet");
 const wallet = require("../models/wallet");
 
 let ECPair = ecfacory.ECPairFactory(secp);
@@ -13,8 +12,10 @@ async function sendTransaction(req, res) {
 
   console.log(req.body)
 
+
   const { amntToSend, yourPubAdd, sendingToAddr } = req.body
-  
+  console.log(typeof (amntToSend))
+  try{
   let youWalAddre = await wallet.findOne({ address: yourPubAdd })
 
   const keyBuffer = Buffer.from(
@@ -33,7 +34,7 @@ async function sendTransaction(req, res) {
     outputs: [
       {
         addresses: [sendingToAddr],
-        value: amntToSend,
+        value: Number(amntToSend),
       },
     ],
   };
@@ -55,7 +56,7 @@ async function sendTransaction(req, res) {
     responses = await resp.json();
 
     console.log(resp.ok, responses);
-    return res.status(400).json("bad req");
+    return res.status(400).json(responses);
   }
 
   responses.pubkeys = [];
@@ -91,12 +92,26 @@ async function sendTransaction(req, res) {
 
     let out = await sen.json();
 
-    console.log("danielss", sen, out);
+    if (sen.ok) {
+      console.log(sen.ok)
 
-    return res.status(200).json("good request");
+      return res.status(200).json(out);
+
+    } else {
+      console.log(sen.ok, out)
+      return res.status(200).json(out);
+    }
+
+
+
+
   } catch (e) {
     console.log(e);
     return res.status(400).json("bad request");
+    }
+    
+  } catch (e) {
+    console.log(e)
   }
 
 

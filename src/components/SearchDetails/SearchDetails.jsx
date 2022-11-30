@@ -26,6 +26,8 @@ export default class SearchDetails extends Component {
       adressObj: jsonDetials["adressObj"].data,
       editSuccess: null,
       userWallets: jsonDetials["userWallets"],
+      err: null,
+      success: null,
     });
   };
 
@@ -67,6 +69,7 @@ export default class SearchDetails extends Component {
       await this.setState({
         submittedTransaction: false,
         amntToSend: 1,
+        success: null,
       });
     } else {
       // /api/transactions/sendTransaction
@@ -81,28 +84,32 @@ export default class SearchDetails extends Component {
           sendingToAddr: this.state.adressObj["address"],
         }),
       };
-      const fetchResponse = await fetch("/api/transactions/sendTransaction", data);
-
-      console.log(
-        this.state.amntToSend,
-        this.state.yourPubAdd,
-        this.state.adressObj["address"]
+      const fetchResponse = await fetch(
+        "/api/transactions/sendTransaction",
+        data
       );
-      await this.setState({
-        submittedTransaction: true,
-        amntToSend: 1,
-      });
+
+      let returnedData = await fetchResponse.json();
+      if (!fetchResponse.ok) {
+        await this.setState({ err: returnedData.errors, success: null });
+        return;
+      } else {
+        console.log(fetchResponse.ok, returnedData);
+        await this.setState({
+          submittedTransaction: true,
+          amntToSend: 1,
+          success: "Transacion Succeeded Update Below To See Latest Updates",
+        });
+      }
     }
   };
 
   yourPubAdd = async (e) => {
-    // console.log('hi')
-    // this.setState({})
-    await this.setState({ yourPubAdd: e.target.value });
+    await this.setState({ yourPubAdd: e.target.value, err: null, success: null });
   };
 
   amntToSend = async (e) => {
-    await this.setState({ amntToSend: e.target.value });
+    await this.setState({ amntToSend: e.target.value, err: null, success: null });
   };
 
   render() {
@@ -142,7 +149,9 @@ export default class SearchDetails extends Component {
                   </select>
                 </div>
                 <div>
-                  <label>Amount To Send: </label>
+                  <label>
+                    Amount To Send{" (Your Amount * (10^8) = Amount In BTC)"}:{" "}
+                  </label>
                   <input
                     type="number"
                     className="form-control"
@@ -150,16 +159,17 @@ export default class SearchDetails extends Component {
                     value={this.state.amntToSend}
                     onChange={this.amntToSend}
                     min="1"
+                    max="100000000"
                     required
                   />
                 </div>
                 <div>
-                  <label>Outputs Adresses {"(Sending To)"}: </label>
+                  <label>Outputs Adress {"(Sending To)"}: </label>
                   <input
                     type="text"
                     className="form-control"
                     value={this.state.adressObj["address"]}
-                    readonly
+                    readOnly
                   />
                 </div>
                 {this.state.amntToSend && this.state.yourPubAdd ? (
@@ -184,6 +194,23 @@ export default class SearchDetails extends Component {
                   <div className="text-center">
                     <p>Fields Can't Be Empty</p>
                   </div>
+                )}
+                {this.state.err && this.state.err.length > 0 ? (
+                  <div className="text-center transactErrDiv">
+                    {this.state.err.map((val, id) => {
+                      return <p style={{ color: "red" }}>{val.error}</p>;
+                    })}
+                  </div>
+                ) : (
+                  <>
+                    {this.state.success ? (
+                      <div className="text-center transactErrDiv">
+                        <p style={{ color: "green" }}>{this.state.success}</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
               </form>
             </div>
