@@ -82,7 +82,7 @@ async function sendTransaction(req, res) {
   try {
     // console.log("daniel", obj.tx.inputs, obj.tx.outputs)
     let sen = await fetch(
-      "https://api.blockcypher.com/v1/btc/test3/txs/send?token=e973117a41414b4fb70ca58fdc51c9e6",
+      `https://api.blockcypher.com/v1/btc/test3/txs/send?token=${process.env.token}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -99,6 +99,7 @@ export default class SearchDetails extends Component {
           submittedTransaction: true,
           amntToSend: 1,
           success: "Transacion Succeeded Update Below To See Latest Updates",
+          
         });
       }
     }
