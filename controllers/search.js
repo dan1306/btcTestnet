@@ -18,7 +18,7 @@ async function searchAddress(req, res) {
 
     let minPassed = (Math.abs(tim2 - tim1) / 36e5) * 60;
 
-    if (minPassed > 2) {
+    if (minPassed > 30) {
       let fetchResponse = await fetch(
         `https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`
       );
