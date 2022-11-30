@@ -10,6 +10,9 @@ export default class SearchDetails extends Component {
     adressObj: null,
     editSuccess: null,
     userWallets: null,
+    yourPubAdd: null,
+    amntToSend: null,
+    submittedTransaction: false,
   };
 
   componentDidMount = async () => {
@@ -57,9 +60,31 @@ export default class SearchDetails extends Component {
     }
   };
 
-  changed = (e) => {
+  submittedTransaction = async (e) => {
+    e.preventDefault();
+
+    if (this.state.submittedTransaction) {
+      await this.setState({
+        submittedTransaction: false,
+        amntToSend: 1,
+      });
+    } else {
+      console.log(this.state.amntToSend, this.state.yourPubAdd, this.state.adressObj["address"] )
+      await this.setState({
+        submittedTransaction: true,
+        amntToSend: 1,
+      });
+    }
+  };
+
+  yourPubAdd = async (e) => {
     // console.log('hi')
-    console.log(e.target.value);
+    // this.setState({})
+    await this.setState({ yourPubAdd: e.target.value });
+  };
+
+  amntToSend = async (e) => {
+    await this.setState({ amntToSend: e.target.value });
   };
 
   render() {
@@ -71,13 +96,14 @@ export default class SearchDetails extends Component {
           <>
             <div className="transactionDiv">
               <h4 className="text-center">Make A Transaction</h4>
-              <form>
+              <form onSubmit={this.submittedTransaction}>
                 <div>
-                  <label>Send From: </label>
+                  <label>Inputs Address {'(Sending From)'}: </label>
                   <select
                     class="form-select"
                     aria-label="Default select example"
-                    onChange={this.changed}
+                    onChange={this.yourPubAdd}
+                    required
                   >
                     <option disabled selected value>
                       Select One Of Your Public Adresses
@@ -86,8 +112,8 @@ export default class SearchDetails extends Component {
                       <>
                         {this.state.userWallets.map((val, id) => {
                           return (
-                            <option value={val.public}>
-                              {val.name}: {val.public}
+                            <option value={val.address}>
+                              {val.name}: {val.address}
                             </option>
                           );
                         })}
@@ -102,12 +128,15 @@ export default class SearchDetails extends Component {
                   <input
                     type="number"
                     className="form-control"
+                    name="amntToSend"
+                    value={this.state.amntToSend}
+                    onChange={this.amntToSend}
                     min="1"
                     required
                   />
                 </div>
                 <div>
-                  <label>Sending To: </label>
+                  <label>Outputs Adresses {'(Sending To)'}: </label>
                   <input
                     type="text"
                     className="form-control"
@@ -115,6 +144,29 @@ export default class SearchDetails extends Component {
                     readonly
                   />
                 </div>
+                {this.state.amntToSend && this.state.yourPubAdd ? (
+                  <>
+                    {this.state.submittedTransaction ? (
+                      <>
+                        <div className="text-center">
+                          <button type="submit" className="btn btn-success">
+                            Make Another Transaction
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center">
+                        <button type="submit" className="btn btn-primary">
+                          Submit
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="text-center">
+                    <p>Fields Can't Be Empty</p>
+                  </div>
+                )}
               </form>
             </div>
             <div className="addreHeader">
