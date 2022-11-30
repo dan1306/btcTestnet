@@ -1,7 +1,12 @@
 const fetch = require("node-fetch");
 const Search = require("../models/search");
+const Wallet = require("../models/wallet");
 
 async function searchAddress(req, res) {
+  console.log(req.user);
+
+  let userWallets = await Wallet.find({ userID: req.user._id });
+
   let addr = req.body.addrs;
 
   let findAddr = await Search.findOne({ address: addr });
@@ -23,13 +28,14 @@ async function searchAddress(req, res) {
         findAddr.data = fetchResponse;
         findAddr.updatedAt = new Date();
         findAddr = await findAddr.save();
-        console.log(fetchResponse);
+        // console.log(fetchResponse);
         let obj = {
           newData: false,
 
           updated: true,
           minutesPassed: 0,
           adressObj: findAddr,
+          userWallets: userWallets
         };
 
         res.status(200).json(obj);
@@ -44,6 +50,7 @@ async function searchAddress(req, res) {
         updated: false,
         minutesPassed: minPassed,
         adressObj: findAddr,
+        userWallets: userWallets
       };
 
       return res.status(200).json(obj);
@@ -64,6 +71,7 @@ async function searchAddress(req, res) {
         updated: true,
         minutesPassed: 0,
         adressObj: searchField,
+        userWallets: userWallets
       };
 
       return res.status(200).json(obj);
@@ -76,7 +84,7 @@ async function searchAddress(req, res) {
 }
 
 async function editAddress(req, res) {
-    console.log("zzzz", req.body.addrs)
+  console.log("zzzz", req.body.addrs, req.user);
   let addr = req.body.addrs;
 
   let findAddr = await Search.findOne({ address: addr });
@@ -108,6 +116,6 @@ async function editAddress(req, res) {
 }
 
 module.exports = {
-    searchAddress,
-    editAddress
+  searchAddress,
+  editAddress,
 };

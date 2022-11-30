@@ -75,7 +75,7 @@ class App extends Component {
             <Route path="/yourWallets" element={<YourWallets user={this.state.user} detailAdress = {this.detailAdress} />} />
             <Route path="/allWallets" element={<AllWallets detailAdress = {this.detailAdress} />} />
             <Route path="/walletDetails" element={<WalletDetails address = {this.state.walletDetail}  />} />
-            <Route path="/searchAndSend" element={<Search  />} />
+            <Route path="/searchAndSend" element={<Search user={this.state.user}  />} />
 
             
             <Route

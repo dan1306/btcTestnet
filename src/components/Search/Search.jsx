@@ -6,8 +6,7 @@ export default class SearchForm extends Component {
   state = {
     submitted: false,
     pubAddress: "",
-      jsonDetials: null,
-    
+    jsonDetials: null,
   };
 
   handleChange = async (e) => {
@@ -18,11 +17,15 @@ export default class SearchForm extends Component {
 
   handleSubmit = async (evt) => {
     evt.preventDefault();
+    let jwt = localStorage.getItem("token");
 
     try {
       const options = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: "Bearer " + jwt,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           addrs: this.state.pubAddress,
         }),
@@ -79,7 +82,11 @@ export default class SearchForm extends Component {
                 ) : (
                   <>
                     {this.state.jsonDetials["adressObj"] ? (
-                      <SearchDetails Details={this.state.jsonDetials} address= {this.state.pubAddress} />
+                      <SearchDetails
+                        Details={this.state.jsonDetials}
+                        address={this.state.pubAddress}
+                        user={this.props.user}
+                      />
                     ) : (
                       <></>
                     )}

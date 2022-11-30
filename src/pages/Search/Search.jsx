@@ -6,7 +6,7 @@ export default class Search extends Component {
     return (
       <div className="mainDiv">
         {" "}
-        <SearchForm />
+        <SearchForm user={this.props.user} />
       </div>
     );
   }

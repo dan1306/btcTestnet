@@ -119,8 +119,8 @@
   }
 
   .transactionDiv{
-    background-color: #d8d8d8;
-    background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+    background-color: #a8edea;
+    background-image: linear-gradient(90deg, #fed6e3 50%, transparent 50%),
     linear-gradient(90deg,#a8edea 50%, transparent 50%),
     linear-gradient(90deg, transparent 50%, #a8edea 50%),
     linear-gradient(90deg, transparent 50%, #a8edea 50%);

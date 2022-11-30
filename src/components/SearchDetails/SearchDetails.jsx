@@ -9,6 +9,7 @@ export default class SearchDetails extends Component {
     minutePassed: null,
     adressObj: null,
     editSuccess: null,
+    userWallets: null,
   };
 
   componentDidMount = async () => {
@@ -21,15 +22,21 @@ export default class SearchDetails extends Component {
       minutesPassed: jsonDetials["minutesPassed"],
       adressObj: jsonDetials["adressObj"].data,
       editSuccess: null,
+      userWallets: jsonDetials["userWallets"],
     });
   };
 
   edit = async () => {
     console.log("clicked");
+    let jwt = localStorage.getItem("token");
+
     await this.setState({ editSuccess: null });
     const data = {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: "Bearer " + jwt,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ addrs: this.state.adressObj["address"] }),
     };
 
@@ -75,9 +82,19 @@ export default class SearchDetails extends Component {
                     <option disabled selected value>
                       Select One Of Your Public Adresses
                     </option>
-                    <option value="one">One</option>
-                    <option value="two">Two</option>
-                    <option value="three">Three</option>
+                    {this.state.userWallets.length > 0 ? (
+                      <>
+                        {this.state.userWallets.map((val, id) => {
+                          return (
+                            <option value={val.public}>
+                              {val.name}: {val.public}
+                            </option>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
                 <div>
@@ -96,7 +113,6 @@ export default class SearchDetails extends Component {
                     className="form-control"
                     value={this.state.adressObj["address"]}
                     readonly
-                    
                   />
                 </div>
               </form>
