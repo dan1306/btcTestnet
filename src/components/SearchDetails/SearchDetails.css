@@ -117,3 +117,27 @@
     color: green;
     font-weight: bolder;
   }
+
+  .transactionDiv{
+    background-color: #d8d8d8;
+    background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+    linear-gradient(90deg,#a8edea 50%, transparent 50%),
+    linear-gradient(90deg, transparent 50%, #a8edea 50%),
+    linear-gradient(90deg, transparent 50%, #a8edea 50%);
+    background-size: 13px, 29px, 37px, 53px;    min-height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px #d8d8d8;
+    min-height: 200px;
+
+  }
+
+  .form-select{
+    margin: 10px 0;
+  }
+
+  .form-control{
+    margin: 10px 0;
+  }

@@ -25,7 +25,7 @@ var newtx = {
   ],
   outputs: [
     {
-      addresses: ["mzhxo3HtY1Wc2o3w5aFUYFpm3soGVhPZp6"],
+      addresses: ["mtSQhjjYPW4w3GWZPBd1PUvgUKiKpfWPFH"],
       value: 10000,
     },
   ],

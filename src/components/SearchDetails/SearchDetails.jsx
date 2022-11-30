@@ -35,8 +35,8 @@ export default class SearchDetails extends Component {
 
     const fetchResponse = await fetch("/api/search/editAddre", data);
 
-      if (fetchResponse.ok) {
-        console.log(fetchResponse.ok)
+    if (fetchResponse.ok) {
+      console.log(fetchResponse.ok);
       let jsonDetials = await fetchResponse.json();
 
       console.log(jsonDetials["adressObj"].data);
@@ -50,6 +50,11 @@ export default class SearchDetails extends Component {
     }
   };
 
+  changed = (e) => {
+    // console.log('hi')
+    console.log(e.target.value);
+  };
+
   render() {
     // const balance = String(Number(this.state.adressObj.balance) / Math.pow(10, 8) )
 
@@ -57,6 +62,45 @@ export default class SearchDetails extends Component {
       <div className="padSearchDetails">
         {this.props.address && this.state.adressObj ? (
           <>
+            <div className="transactionDiv">
+              <h4 className="text-center">Make A Transaction</h4>
+              <form>
+                <div>
+                  <label>Send From: </label>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    onChange={this.changed}
+                  >
+                    <option disabled selected value>
+                      Select One Of Your Public Adresses
+                    </option>
+                    <option value="one">One</option>
+                    <option value="two">Two</option>
+                    <option value="three">Three</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Amount To Send: </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    min="1"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Sending To: </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.adressObj["address"]}
+                    readonly
+                    
+                  />
+                </div>
+              </form>
+            </div>
             <div className="addreHeader">
               <h6 className="btc">
                 <i class="fa-solid fa-qrcode"></i> Bitcoin Testnet Address
@@ -87,7 +131,9 @@ export default class SearchDetails extends Component {
                   </div>
                   <>
                     {this.state.editSuccess ? (
-                      <p className="editSuccess text-center">{this.state.editSuccess}</p>
+                      <p className="editSuccess text-center">
+                        {this.state.editSuccess}
+                      </p>
                     ) : (
                       <></>
                     )}
