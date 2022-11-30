@@ -2,13 +2,11 @@ import { Component } from "react";
 import "./AllWallets.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-
 export default class createWallet extends Component {
   state = {
     alllWallets: [],
   };
 
-  
   componentDidMount = async () => {
     try {
       let jwt = localStorage.getItem("token");
@@ -26,29 +24,6 @@ export default class createWallet extends Component {
     }
   };
 
-
-  // componentDidMount = async () => {
-  //   try {
-  //     let jwt = localStorage.getItem("token");
-
-  //     let getYourWallets = await fetch("/api/wallet/yourWallets", {
-  //       headers: { Authorization: "Bearer " + jwt },
-  //     });
-  //     if (getYourWallets.ok) {
-  //       getYourWallets = await getYourWallets.json();
-  //       console.log(getYourWallets);
-  //       await this.setState({ yourWallets: getYourWallets });
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-
-
-
-
-
   render() {
     return (
       <>
@@ -65,15 +40,17 @@ export default class createWallet extends Component {
                   <p className="truncate">Address: {wallet.address}</p>
                   <p className="truncate">Wif: .............</p>
                   <div className="mg text-center">
-                    <Link to='/walletDetails'>
-                      <button type="button" class="btn btn-primary" onMouseOver={() => {
-                        this.props.detailAdress(wallet.address)
-                      }
-                      }>
+                    <Link to="/walletDetails">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onMouseOver={() => {
+                          this.props.detailAdress(wallet.address);
+                        }}
+                      >
                         View Details
                       </button>
                     </Link>
-
                   </div>
                 </div>
               );

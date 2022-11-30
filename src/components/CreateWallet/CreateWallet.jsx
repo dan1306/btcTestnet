@@ -43,7 +43,7 @@ export default class createWallet extends Component {
         await this.setState({ err: returnedData.error });
         return;
       } else {
-        await this.setState({ err: null, submitted: true  });
+        await this.setState({ err: null, submitted: true });
         return;
       }
     } catch (err) {
@@ -72,9 +72,7 @@ export default class createWallet extends Component {
             {this.state.submitted ? (
               <div className="text-center">
                 <Link to="/yourWallets">
-                  <button className="btn btn-success">
-                    View Your Wallets
-                  </button>
+                  <button className="btn btn-success">View Your Wallets</button>
                 </Link>
               </div>
             ) : (
@@ -85,19 +83,18 @@ export default class createWallet extends Component {
               </div>
             )}
           </form>
-          
+
           {err ? (
             <>
               <h3 className="text-center err">{err}</h3>
             </>
           ) : (
-              <>
-                {
-                  this.state.submitted ? (
-                    <h3 className="text-center success">Wallet Created</h3>
-
-                  ):(<> </>)
-                }
+            <>
+              {this.state.submitted ? (
+                <h3 className="text-center success">Wallet Created</h3>
+              ) : (
+                <> </>
+              )}
             </>
           )}
         </div>

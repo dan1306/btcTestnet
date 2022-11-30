@@ -33,7 +33,9 @@ export default class WalletDetail extends Component {
         {this.props.address && this.state.adressObj ? (
           <>
             <div className="addreHeader">
-              <h6 className="btc"><i class="fa-solid fa-qrcode"></i> Bitcoin Testnet Address</h6>
+              <h6 className="btc">
+                <i class="fa-solid fa-qrcode"></i> Bitcoin Testnet Address
+              </h6>
               <h5 className="btcaddre">{this.state.adressObj["address"]}</h5>
             </div>
             <div className="mainDiv ">
@@ -193,7 +195,10 @@ export default class WalletDetail extends Component {
                                     </span>{" "}
                                     From
                                   </p>
-                                  <p className="btcAddresss"><i class="fa-solid fa-qrcode"></i>{" "} {inp.addresses[0]}</p>
+                                  <p className="btcAddresss">
+                                    <i class="fa-solid fa-qrcode"></i>{" "}
+                                    {inp.addresses[0]}
+                                  </p>
                                 </div>
                               );
                             })}
@@ -219,7 +224,10 @@ export default class WalletDetail extends Component {
                                     </span>{" "}
                                     To
                                   </p>
-                                  <p className="btcAddresss"><i class="fa-solid fa-qrcode"></i>{" "}{out.addresses[0]}</p>
+                                  <p className="btcAddresss">
+                                    <i class="fa-solid fa-qrcode"></i>{" "}
+                                    {out.addresses[0]}
+                                  </p>
                                 </div>
                               );
                             })}
@@ -237,7 +245,9 @@ export default class WalletDetail extends Component {
         ) : (
           <>
             <div className="addreHeader">
-              <h6 className="btc"><i class="fa-solid fa-qrcode"></i> Bitcoin Testnet Address</h6>
+              <h6 className="btc">
+                <i class="fa-solid fa-qrcode"></i> Bitcoin Testnet Address
+              </h6>
               <h5 className="btcaddre">..................................</h5>
             </div>
             <div className="mainDiv row">

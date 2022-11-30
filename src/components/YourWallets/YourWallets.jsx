@@ -31,8 +31,6 @@ export default class createWallet extends Component {
     }
   };
 
-
-
   render() {
     return (
       <>
@@ -49,15 +47,17 @@ export default class createWallet extends Component {
                   <p className="truncate">Address: {wallet.address}</p>
                   <p className="truncate">Wif: {wallet.wif}</p>
                   <div className="mg text-center">
-                    <Link to='/walletDetails'>
-                      <button type="button" class="btn btn-primary" onMouseOver={() => {
-                        this.props.detailAdress(wallet.address)
-                      }
-                      }>
+                    <Link to="/walletDetails">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onMouseOver={() => {
+                          this.props.detailAdress(wallet.address);
+                        }}
+                      >
                         View Details
                       </button>
                     </Link>
-
                   </div>
                 </div>
               );
@@ -76,7 +76,9 @@ export default class createWallet extends Component {
                   Create A Wallet
                 </button> */}
                 <Link to="/createAwallet">
-                  <button className="btn btn-primary wallBtn">Create A Wallet</button>
+                  <button className="btn btn-primary wallBtn">
+                    Create A Wallet
+                  </button>
                 </Link>
               </div>
             </div>

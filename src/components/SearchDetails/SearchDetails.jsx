@@ -99,18 +99,25 @@ export default class SearchDetails extends Component {
           submittedTransaction: true,
           amntToSend: 1,
           success: "Transacion Succeeded Update Below To See Latest Updates",
-          
         });
       }
     }
   };
 
   yourPubAdd = async (e) => {
-    await this.setState({ yourPubAdd: e.target.value, err: null, success: null });
+    await this.setState({
+      yourPubAdd: e.target.value,
+      err: null,
+      success: null,
+    });
   };
 
   amntToSend = async (e) => {
-    await this.setState({ amntToSend: e.target.value, err: null, success: null });
+    await this.setState({
+      amntToSend: e.target.value,
+      err: null,
+      success: null,
+    });
   };
 
   render() {
