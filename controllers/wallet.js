@@ -2,50 +2,44 @@ const fetch = require("node-fetch");
 const Wallet = require("../models/wallet");
 
 async function addressDetails(req, res) {
-  console.log(req.params.addrs)
+  console.log(req.params.addrs);
 
   try {
-    let addr = req.params.addrs
-    let fetchResponse = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`)
-    fetchResponse = await fetchResponse.json()
-    res.status(200).json(fetchResponse)
+    let addr = req.params.addrs;
+    let fetchResponse = await fetch(
+      `https://api.blockcypher.com/v1/btc/test3/addrs/${addr}/full?limit=50`
+    );
+    fetchResponse = await fetchResponse.json();
+    res.status(200).json(fetchResponse);
   } catch (e) {
-    res.status(400).json(e)
+    res.status(400).json(e);
   }
-
 }
 
-
 async function yourWallets(req, res) {
-
-
   Wallet.find({ userID: req.user._id }, (err, yourWallets) => {
     if (err) {
-      res.status(400).json(err)
+      res.status(400).json(err);
     } else {
-      console.log(yourWallets)
-      res.status(200).json(yourWallets)
+      console.log(yourWallets);
+      res.status(200).json(yourWallets);
     }
-  })
-  
+  });
 }
 
 async function allWallets(req, res) {
-
   // console.log(req.user)
   // res.status(200).json(req.suer)
 
   Wallet.find({ userID: { $ne: req.user._id } }, (err, yourWallets) => {
     if (err) {
-      res.status(400).json(err)
+      res.status(400).json(err);
     } else {
-      console.log(yourWallets)
-      res.status(200).json(yourWallets)
+      console.log(yourWallets);
+      res.status(200).json(yourWallets);
     }
-  })
-  
+  });
 }
-
 
 async function createWallet(req, res) {
   console.log(req.user);
@@ -103,5 +97,5 @@ module.exports = {
   createWallet,
   yourWallets,
   allWallets,
-  addressDetails
+  addressDetails,
 };

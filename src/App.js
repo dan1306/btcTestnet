@@ -3,19 +3,17 @@ import NavBar from "./components/NavBar/NavBar";
 import React, { Component } from "react";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import { Route, Routes, Navigate } from "react-router-dom";
-import CreateAwallet from './pages/CreateWallet/CreateAwallet'
-import YourWallets from './pages/YourWallets/YourWallets'
-import AllWallets from './pages/AllWallets/AllWallets'
+import CreateAwallet from "./pages/CreateWallet/CreateAwallet";
+import YourWallets from "./pages/YourWallets/YourWallets";
+import AllWallets from "./pages/AllWallets/AllWallets";
 import WalletDetails from "./pages/WalletDetails/WalletDetails";
 import Search from "./pages/Search/Search";
-
-
 
 class App extends Component {
   state = {
     user: null,
     showLogin: true,
-    walletDetail: null
+    walletDetail: null,
   };
 
   componentDidMount = () => {
@@ -54,11 +52,10 @@ class App extends Component {
 
   detailAdress = async (addre) => {
     if (this.state.walletDetail) {
-      await this.setState({walletDetail: null})
+      await this.setState({ walletDetail: null });
     }
-    await this.setState({walletDetail: addre})
-
-  }
+    await this.setState({ walletDetail: addre });
+  };
 
   render() {
     return (
@@ -72,12 +69,28 @@ class App extends Component {
         {this.state.user ? (
           <Routes>
             <Route path="/createAwallet" element={<CreateAwallet />} />
-            <Route path="/yourWallets" element={<YourWallets user={this.state.user} detailAdress = {this.detailAdress} />} />
-            <Route path="/allWallets" element={<AllWallets detailAdress = {this.detailAdress} />} />
-            <Route path="/walletDetails" element={<WalletDetails address = {this.state.walletDetail}  />} />
-            <Route path="/searchAndSend" element={<Search user={this.state.user}  />} />
+            <Route
+              path="/yourWallets"
+              element={
+                <YourWallets
+                  user={this.state.user}
+                  detailAdress={this.detailAdress}
+                />
+              }
+            />
+            <Route
+              path="/allWallets"
+              element={<AllWallets detailAdress={this.detailAdress} />}
+            />
+            <Route
+              path="/walletDetails"
+              element={<WalletDetails address={this.state.walletDetail} />}
+            />
+            <Route
+              path="/searchAndSend"
+              element={<Search user={this.state.user} />}
+            />
 
-            
             <Route
               path="*"
               element={<Navigate to="/searchAndSend" replace />}

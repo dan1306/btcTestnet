@@ -35,7 +35,7 @@ async function searchAddress(req, res) {
           updated: true,
           minutesPassed: 0,
           adressObj: findAddr,
-          userWallets: userWallets
+          userWallets: userWallets,
         };
 
         res.status(200).json(obj);
@@ -50,7 +50,7 @@ async function searchAddress(req, res) {
         updated: false,
         minutesPassed: minPassed,
         adressObj: findAddr,
-        userWallets: userWallets
+        userWallets: userWallets,
       };
 
       return res.status(200).json(obj);
@@ -71,7 +71,7 @@ async function searchAddress(req, res) {
         updated: true,
         minutesPassed: 0,
         adressObj: searchField,
-        userWallets: userWallets
+        userWallets: userWallets,
       };
 
       return res.status(200).json(obj);
