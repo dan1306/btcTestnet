@@ -69,7 +69,25 @@ export default class SearchDetails extends Component {
         amntToSend: 1,
       });
     } else {
-      console.log(this.state.amntToSend, this.state.yourPubAdd, this.state.adressObj["address"] )
+      // /api/transactions/sendTransaction
+      const data = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amntToSend: this.state.amntToSend,
+          yourPubAdd: this.state.yourPubAdd,
+          sendingToAddr: this.state.adressObj["address"],
+        }),
+      };
+      const fetchResponse = await fetch("/api/transactions/sendTransaction", data);
+
+      console.log(
+        this.state.amntToSend,
+        this.state.yourPubAdd,
+        this.state.adressObj["address"]
+      );
       await this.setState({
         submittedTransaction: true,
         amntToSend: 1,
@@ -98,7 +116,7 @@ export default class SearchDetails extends Component {
               <h4 className="text-center">Make A Transaction</h4>
               <form onSubmit={this.submittedTransaction}>
                 <div>
-                  <label>Inputs Address {'(Sending From)'}: </label>
+                  <label>Inputs Address {"(Sending From)"}: </label>
                   <select
                     class="form-select"
                     aria-label="Default select example"
@@ -136,7 +154,7 @@ export default class SearchDetails extends Component {
                   />
                 </div>
                 <div>
-                  <label>Outputs Adresses {'(Sending To)'}: </label>
+                  <label>Outputs Adresses {"(Sending To)"}: </label>
                   <input
                     type="text"
                     className="form-control"

@@ -3,6 +3,7 @@ var bitcoin = require("bitcoinjs-lib");
 var secp = require("tiny-secp256k1");
 var ecfacory = require("ecpair");
 const Wallet = require("../models/wallet");
+const wallet = require("../models/wallet");
 
 let ECPair = ecfacory.ECPairFactory(secp);
 
@@ -10,34 +11,35 @@ let ECPair = ecfacory.ECPairFactory(secp);
 
 async function sendTransaction(req, res) {
 
+  console.log(req.body)
 
-    return res.status(200).json(req.body)
+  const { amntToSend, yourPubAdd, sendingToAddr } = req.body
+  
+  let youWalAddre = await wallet.findOne({ address: yourPubAdd })
 
+  const keyBuffer = Buffer.from(
+    youWalAddre.private,
+    "hex"
+  );
 
+  let keys = ECPair.fromPrivateKey(keyBuffer);
 
-    const keyBuffer = Buffer.from(
-        "8de0598c0bde20de97b9324960d20f4388290a496a82b420e9c6d826bf68d33c",
-        "hex"
-      );
-      let keys = ECPair.fromPrivateKey(keyBuffer);
-      
-      let newtx = {
-        inputs: [
-          {
-            addresses: ["mig6drj6HusuAFLE7qr5ejR7rCYWKzjB1y"],
-          },
-        ],
-        outputs: [
-          {
-            addresses: ["mzhxo3HtY1Wc2o3w5aFUYFpm3soGVhPZp6"],
-            value: 1,
-          },
-        ],
-      };
-
+  let newtx = {
+    inputs: [
+      {
+        addresses: [yourPubAdd],
+      },
+    ],
+    outputs: [
+      {
+        addresses: [sendingToAddr],
+        value: amntToSend,
+      },
+    ],
+  };
 
   let resp = await fetch(
-    "https://api.blockcypher.com/v1/btc/test3/txs/new?token=e973117a41414b4fb70ca58fdc51c9e6",
+    `https://api.blockcypher.com/v1/btc/test3/txs/new?token=${process.env.token}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,7 +51,6 @@ async function sendTransaction(req, res) {
 
   if (resp.ok) {
     responses = await resp.json();
-    // console.log("dannnnn",resp, responses)
   } else {
     responses = await resp.json();
 
@@ -76,9 +77,6 @@ async function sendTransaction(req, res) {
   obj["signatures"] = responses.signatures;
 
   obj["pubkeys"] = "responses.pubkeys";
-  console.log("DAA", obj);
-
-  // // https://api.blockcypher.com/v1/btc/main/txs/send?token=e973117a41414b4fb70ca58fdc51c9e6
 
   try {
     // console.log("daniel", obj.tx.inputs, obj.tx.outputs)
@@ -100,6 +98,7 @@ async function sendTransaction(req, res) {
     console.log(e);
     return res.status(400).json("bad request");
   }
+
 
 }
 
