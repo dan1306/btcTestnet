@@ -158,7 +158,7 @@ export default class SearchDetails extends Component {
                 </div>
                 <div>
                   <label>
-                    Amount To Send{" (Your Amount * (10^8) = Amount In BTC)"}:{" "}
+                    Amount To Send{" (Your Amount / (10^8) = Amount In BTC)"}:{" "}
                   </label>
                   <input
                     type="number"
