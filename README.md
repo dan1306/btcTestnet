@@ -3,6 +3,11 @@
 A simple application by which a user can send some currency
 (testnet bitcoin) from one wallet to another.
 
+### Technologies used
+
+Blockcypher API, React, Mongoose, Express, Node, Bootstrap, bcrypt, jsonwebtoken
+
+
 <!-- ## Available Scripts
 
 In the project directory, you can run:
