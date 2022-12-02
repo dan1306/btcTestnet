@@ -13,7 +13,7 @@ export default class NavBar extends Component {
     return (
       <Navbar bg="light" expand="lg" className="nav-color">
         <Container>
-          <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand>eval2021</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {userState ? (
