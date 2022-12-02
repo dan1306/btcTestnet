@@ -7,6 +7,21 @@ A simple application by which a user can send some currency
 
 Blockcypher API, React, Mongoose, Express, Node, Bootstrap, bcrypt, jsonwebtoken
 
+### Summary
+
+This application is centered around the use of BTC-TESTNET and employs the Bockypher API and token to create addresses, create wallets associated to a particular address, make transaction to public addresses, and view details of a particular public address.  
+
+Before using the application, it is best to define your token, SECRET (your secert could be anything), and SALT_ROUNDS in your .env, you can get your token by registering for an account on blockcypher. 
+
+While using this application it is best to not make too many requests at a time, to prevent being restricted to access of data.   
+
+For the best user experience follow these: 
+
+2000 Requests Per Day 
+
+200 Requests Per Hour 
+
+3 Requests Per Second 
 
 <!-- ## Available Scripts
 
