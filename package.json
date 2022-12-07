@@ -1,6 +1,9 @@
 {
   "name": "eval20021",
   "version": "0.1.0",
+  "engines": {
+    "node": "17.9.0"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
