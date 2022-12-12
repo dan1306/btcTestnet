@@ -21,7 +21,15 @@ For the best user experience follow these:
 
 200 Requests Per Hour 
 
-3 Requests Per Second 
+3 Requests Per Second
+
+### Intro
+
+Designed with Bootstrap this is an application where users can create multiple Btc-TestNet addresses and corresponding wallets, all bound to an individual account. 
+
+Btc-TestNet is a separate blockchain from actual Bitcoin. It holds no value and is used for testing purposes.
+
+### Logging In And Signing Up
 
 <!-- ## Available Scripts
 
