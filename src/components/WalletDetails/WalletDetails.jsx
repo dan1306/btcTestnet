@@ -8,6 +8,9 @@ export default class WalletDetail extends Component {
   };
 
   componentDidMount = async () => {
+    // here with the passed in public address we recieve from app.js
+    // we make a call to the back end to retrieve data of that particular
+    // public address and store it in state, if a positive reponse is returned
     try {
       if (this.props.address) {
         let fullEndpoint = await fetch(

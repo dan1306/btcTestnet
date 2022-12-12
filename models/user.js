@@ -13,7 +13,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      trim: true,
+      trim: true, // trims whitespace if your user types something like " alex@123.com " into "alex@123.com"
       minLength: 3,
       required: true,
     },

@@ -23,3 +23,9 @@
 .signUp-btn {
   margin-top: 15px;
 }
+
+
+.err-div{
+  max-width: 300px;
+  overflow-wrap: break-word;
+}

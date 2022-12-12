@@ -8,6 +8,9 @@ export default class createWallet extends Component {
   };
 
   componentDidMount = async () => {
+    // maming a call to the backend to retieve all wallets
+    // not associated with a particular user, and setting recieved data
+    // in state
     try {
       let jwt = localStorage.getItem("token");
 
@@ -24,8 +27,14 @@ export default class createWallet extends Component {
     }
   };
 
+  // this is a view to show all wallets in a given database that is not associated with a
+  // logged in user
   render() {
     return (
+      // when a mouse goes over the view details of a particular
+      // wallet, with that given wallet we send the public address
+      // to app.js with a function call, so that address can be
+      // set in state for use when retieveting data for a given address
       <>
         {this.state.alllWallets.length > 0 ? (
           <div className="row padWalDiv">

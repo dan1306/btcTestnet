@@ -16,6 +16,12 @@ export default class SearchForm extends Component {
   };
 
   handleSubmit = async (evt) => {
+    // When submitted is clicked we make a call to the backend
+    // to retrieve data of a given address in our database if it exist,
+    // or make an API call to retrieve data for a given public address if
+    // it does not exist in the database
+    // regardles of the response we store the recieved data in our state
+    // errors are handled down below
     evt.preventDefault();
     let jwt = localStorage.getItem("token");
 
@@ -45,6 +51,11 @@ export default class SearchForm extends Component {
 
   render() {
     return (
+      // If there is an error in the response we recieve
+      // stored in our state (jsonDetials), it is prompted to the user.
+      // else we pass on the recieved data which will be data pertaining to
+      // the searched for address, along with the searched address and logged in user
+      // info to the SearchDetails component
       <div>
         <div className="searchForm">
           <p className="search">Search For A public Adress Below: </p>

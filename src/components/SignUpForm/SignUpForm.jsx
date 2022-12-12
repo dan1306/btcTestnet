@@ -10,11 +10,17 @@ export default class SignUpForm extends Component {
     error: "",
   };
 
-  handleChange = (evt) => {
-    this.setState({
+  handleChange = async (evt) => {
+    await this.setState({
       [evt.target.name]: evt.target.value,
-      error: "",
+      // error: "",
     });
+
+    if (this.state.password !== this.state.confirm) {
+      await this.setState({ error: "Passwords Do Not Match" });
+    } else {
+      await this.setState({ error: "" });
+    }
   };
 
   handleSubmit = async (evt) => {
@@ -34,14 +40,20 @@ export default class SignUpForm extends Component {
 
       if (!fetchResponse.ok) throw new Error("Fetch failed - Bad request");
 
+      // on a good signup request we place the token
+      // receieved into the local storage, it remanins there
+      // for 24 hours
       let token = await fetchResponse.json();
       localStorage.setItem("token", token);
 
+      // setting the user to the reponse we recieve
+      // when a succesful signup is made, which is a token
+      // which holds user info
       let user = JSON.parse(atob(token.split(".")[1])).user;
       this.props.setUserInState(user);
     } catch (err) {
       console.log("SignupForm error", err);
-      this.setState({ error: "Sign Up Failed - Try Again" });
+      this.setState({ error: "Sign Up Failed - LogIn If You Have An Account" });
     }
   };
 
@@ -106,7 +118,7 @@ export default class SignUpForm extends Component {
             </div>
           </form>
         </div>
-        <div>
+        <div className="err-div text-center">
           <p className="error-message">&nbsp;{this.state.error}</p>
         </div>
       </div>

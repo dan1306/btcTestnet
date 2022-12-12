@@ -1,7 +1,14 @@
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
+  // here with the token recieved from the front end
+  // we validate it, and if it is a valid token and not expired
+  // we turn the token into user data that can be put to use
+  // and store it in req, so other routes can have access to
+  // a particular logged
+  // in user data 
+
   // Check for the token being sent in three different ways
   let token = req.get('Authorization') || req.query.token || req.body.token;
   if (token) {

@@ -16,6 +16,11 @@ export default class NavBar extends Component {
           <Navbar.Brand>BitcoinTestnet</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+          {/* if user exist in app.js state, the bulk of the 
+          apps functionality is enabled for the user
+          else they will only have access to creating an account
+          or logging in
+           */}
             {userState ? (
               <Nav className="ms-auto">
                 <NavDropdown title="Search And Send" id="basic-nav-dropdown">

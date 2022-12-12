@@ -79,7 +79,7 @@ You will have access to a QR code of your public address made possible with the 
 
 On zero confirmations it seems like funds are not available for use and considered unconfirmed, but any confirmations greater than 0 seems to be considered confirmed. Generally, a transaction of  6 or more confirmations is considered completed and irreversible.
 
-For this reason on zero confirmations, there is an open lock with a colour red located in the top right section of that specific block's transaction. On one to five confirmations the lock is still opened but the colour turns to dark yellow. On 6 or more confirmations the lock is closed with a green colour.
+For this reason on zero confirmations, there is an open lock with a colour red located at the top right section of that specific block's transaction. On one to five confirmations the lock is still opened but the colour turns to dark yellow. On 6 or more confirmations the lock is closed with a green colour.
 
 Like the block cypher explorer, there are plans on adding a view which appears when you click a transactions hash.
 
@@ -114,6 +114,6 @@ The wallet address you are sending to and the address you are sending from is al
 Other than that you should receive a success message.
 
 While picking a certain address to make a transaction from, you will find the balance of that
-particular address below the label 'Inputs Address (Sending From):'. This balance is updated every minute. Please leave time interval of a minimum of 1 sec when going from one address to another address. This will prevent making more than 3 request per seocen to the API and being unable to retreive data for an unknown amount of time.
+particular address below the label 'Inputs Address (Sending From):'. This balance is updated every minute. Please leave a time interval of a minimum of 1 sec when going from one address to another address. This will prevent making more than 3 request per second to the API and being unable to retreive data for an unknown amount of time.
 
 <!-- Demonstrate A transaction  -->

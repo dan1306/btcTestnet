@@ -25,9 +25,11 @@ async function create(req, res) {
     // creating a jwt:
     // the first parameter specifies what we want to put into the token (in this case, our user document)
     // the second parameter is a "secret" code. This lets our server verify if an incoming jwt is legit or not.
+    // the third paramater defines the time period in whuch a token remains in effect
     const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
     res.status(200).json(token); // send it to the frontend
   } catch (err) {
+    console.log(err)
     res.status(400).json(err);
   }
 }
@@ -43,6 +45,9 @@ async function login(req, res) {
     const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
     res.status(200).json(token);
   } catch {
+    // for security reasons we purposely do not tell
+    // a user where they went wrong while
+    // trying to login
     res.status(400).json("Bad Credentials");
   }
 }

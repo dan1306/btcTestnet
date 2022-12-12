@@ -19,6 +19,10 @@ export default class createWallet extends Component {
   };
 
   handleSubmit = async (evt) => {
+    // When a user clicks submit a post request is made to the back end
+    // to generate an address with unique keys and a wallet with a unique
+    // name. If a wallet with a given name passed in already exist an object
+    // like response is sent to the fron end (which is here)
     evt.preventDefault();
 
     try {
@@ -39,10 +43,14 @@ export default class createWallet extends Component {
 
       if (!fetchResponse.ok) {
         console.log("daniel", returnedData);
-
+        // response with an object, within it there
+        // exists an err
         await this.setState({ err: returnedData.error });
         return;
       } else {
+        // submitted only become true on a good response
+        // when trying to create a wallet
+        console.log(returnedData)
         await this.setState({ err: null, submitted: true });
         return;
       }
@@ -69,6 +77,9 @@ export default class createWallet extends Component {
                 required
               />
             </div>
+            {/* if submitted is true, we direct user to view all their wallets
+            else we want user to click submit to create a wallet
+             */}
             {this.state.submitted ? (
               <div className="text-center">
                 <Link to="/yourWallets">
@@ -84,6 +95,12 @@ export default class createWallet extends Component {
             )}
           </form>
 
+          {/* if an err exist while trying to create a wallet
+          we send it to for a user to view on the application, else
+          we check if submitted is true, if it is we know we 
+          recieved a good request trying to create a wallet, so we give
+          the user a success message. Else show nothing.
+               */}
           {err ? (
             <>
               <h3 className="text-center err">{err}</h3>

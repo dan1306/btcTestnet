@@ -33,6 +33,9 @@ export default class SignUpForm extends Component {
       let token = await fetchResponse.json();
       localStorage.setItem("token", token);
 
+      // setting the user to the reponse we recieve
+      // when a succesful login is made, which is a token
+      // which holds user info
       const user = JSON.parse(atob(token.split(".")[1])).user;
       this.props.setUserInState(user);
     } catch (err) {

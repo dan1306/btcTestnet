@@ -13,9 +13,13 @@ export default class SearchDetails extends Component {
     yourPubAdd: null,
     amntToSend: null,
     submittedTransaction: false,
+    balance: null,
   };
 
   componentDidMount = async () => {
+    // mostly everything exist within the datails
+    // passed through the props, from data on a searched address,
+    // to all walltes a given user has
     let jsonDetials = this.props.Details;
 
     console.log(jsonDetials["adressObj"].data);
@@ -65,6 +69,14 @@ export default class SearchDetails extends Component {
   submittedTransaction = async (e) => {
     e.preventDefault();
 
+    // here we are making a POST request to the backend, sending the
+    // amount user wants to send, the public address they are sending from,
+    // and the wallet address they are sending to
+
+    // if user has previously succeeded in making a transaction
+    // we want to let them know they can make another transaction by clicking a button,
+    // which sets submittedTransaction from true in state to false and success message to
+    // null
     if (this.state.submittedTransaction) {
       await this.setState({
         submittedTransaction: false,
@@ -91,10 +103,19 @@ export default class SearchDetails extends Component {
 
       let returnedData = await fetchResponse.json();
       if (!fetchResponse.ok) {
+        // if we get a bad request while making a call to the back end
+        // while trying to make a transaction go through, we set the err
+        // in our state to the arr of objects we recieve from making the
+        // request
         await this.setState({ err: returnedData.errors, success: null });
         return;
       } else {
         console.log(fetchResponse.ok, returnedData);
+
+        // if we recieve a positive response
+        // while trying to make a trasnaction
+        // we set the success message in our state to be shown
+        // to a user to "Transacion Succeeded Update Below To See Latest Updates"
         await this.setState({
           submittedTransaction: true,
           amntToSend: 1,
@@ -105,11 +126,43 @@ export default class SearchDetails extends Component {
   };
 
   yourPubAdd = async (e) => {
-    await this.setState({
-      yourPubAdd: e.target.value,
-      err: null,
-      success: null,
-    });
+    // When a user selects a public address they'd like to make a transaction
+    // from, a call is made to the back end. If that address has been
+    // previously searched for and stored in the database, if time passed since that address
+    // was last updated is greater than one minute, we make a call to the API to get the most recent data
+    // of that address, else we send that wallets data to the front end from the database. If wallet
+    // does not exist in databse, a call is made to retrieve and place data in our database pertaining to that address
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        addrs: e.target.value,
+      }),
+    };
+    let fetchResponse = await fetch("/api/search/addressBalance", options);
+
+    if (fetchResponse.ok) {
+      // on a good response we update the balance in our state
+      fetchResponse = await fetchResponse.json();
+
+      await this.setState({
+        yourPubAdd: e.target.value,
+        err: null,
+        success: null,
+        balance: fetchResponse.balance,
+      });
+    } else {
+      // on a bad response
+      // balance is set to does not exist in state
+      await this.setState({
+        yourPubAdd: e.target.value,
+        err: null,
+        success: null,
+        balance: "Does Not Exist",
+      });
+    }
   };
 
   amntToSend = async (e) => {
@@ -132,6 +185,16 @@ export default class SearchDetails extends Component {
               <form onSubmit={this.submittedTransaction}>
                 <div>
                   <label>Inputs Address {"(Sending From)"}: </label>
+                  <>
+                    {this.state.balance ? (
+                      <p>
+                        Selected Adress has a balance of {this.state.balance}{" "}
+                        BTC
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                   <select
                     class="form-select"
                     aria-label="Default select example"
@@ -203,6 +266,13 @@ export default class SearchDetails extends Component {
                     <p>Fields Can't Be Empty</p>
                   </div>
                 )}
+
+                {/* if ther is an err in the process of trying to make 
+                a transaction we want to loop over the arr and get the info
+                that exist within each err object in the array, to show to the user,
+                else, if the transaction was a success we show the user a success
+                message, else we show them nothing
+                 */}
                 {this.state.err && this.state.err.length > 0 ? (
                   <div className="text-center transactErrDiv">
                     {this.state.err.map((val, id) => {
