@@ -31,6 +31,16 @@ Btc-TestNet is a separate blockchain from actual Bitcoin. It holds no value and 
 
 ### Logging In And Signing Up
 
+Before a user can do anything on the website they will either need to log in or signup. For now, all other routes does not exist from a users point of view without logging in or signing up.
+
+When signing up, passwords are not stored in the database as plain text, rather with the help of bcrypt your passwords are hashed meaning encoded into a set of strings and integers, which are decoded and compared to the typed input of your password you provide when logging in. 
+<!-- Demonstrate (Create A New Sign Up, And Show Database) -->
+
+Having to reenter credentials every time you return to a site gets annoying, so to fix this issue with the help of a package called Jason web token, upon signing up or logging in, ( apart from your password which are hashed anyways ) all your other credentials are stored in the local storage.
+
+For 24 hours after logging in or signing up your credentials are saved leaving no need to reenter credentials when you return to the site. 
+<!-- Demonstrate ( show the token in local storage ) -->
+
 <!-- ## Available Scripts
 
 In the project directory, you can run:
