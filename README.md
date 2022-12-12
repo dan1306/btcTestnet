@@ -41,69 +41,79 @@ Having to reenter credentials every time you return to a site gets annoying, so 
 For 24 hours after logging in or signing up your credentials are saved leaving no need to reenter credentials when you return to the site. 
 <!-- Demonstrate ( show the token in local storage ) -->
 
-<!-- ## Available Scripts
+### Logged In View
 
-In the project directory, you can run:
+Once a user has signed up or logged in, they will be directed to a view for searching public addresses and making transactions. This certain route catches any destination searched for which does not exist, and is the route most likely shown to a user upon logging or signing up .
 
-### `npm start`
+### Create A Wallet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Before searching and making transactions to public addresses you will need to create an address and its wallet.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To do this, click the Wallets dropdown in the navigation and then click create a wallet.
 
-### `npm test`
+You will be then directed, to a view where you can create a wallet.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If your wallet name exists you will be prompted with an error otherwise if your chosen wallet name does not exist, upon creation you will be directed to click on a button which leads you to all wallets associated with your account. 
+<!-- Demonstrate -->
 
-### `npm run build`
+### Your Wallets And Details View
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+On the view where all your wallets can be found, you can view the details of a given wallet by clicking the button View Details.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### How does view details work
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+when you hover over view details button with your mouse, that particular wallets address is stored in app.js state.
+This adddress stored in state is put to use when you click the view details button.
 
-### `npm run eject`
+A different page is shown when there is no wallet address in state of app.js.
+<!-- Demonstrate -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### View details
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can fund a created wallet by visiting a BTC-TestNet faucet online.
+<!-- Demonstrate ( fund a wallet, what happens if no wallets are selected on the details view ) -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In the View Details View like the block cypher explorer, you will have access to your RECEIVED, SENT, and BALANCE BTC-TestNet amount, retrieved with a fetch call to the block cypher API. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You will have access to a QR code of your public address made possible with the help of react-qr-code, along with your confirmed and unconfirmed transactions.
 
-## Learn More
+On zero confirmations it seems like funds are not available for use and considered unconfirmed, but any confirmations greater than 0 seems to be considered confirmed. Generally, a transaction of  6 or more confirmations is considered completed and irreversible.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For this reason on zero confirmations, there is an open lock with a colour red located in the top right section of that specific block's transaction. On one to five confirmations the lock is still opened but the colour turns to dark yellow. On 6 or more confirmations the lock is closed with a green colour.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Like the block cypher explorer, there are plans on adding a view which appears when you click a transactions hash.
 
-### Code Splitting
+### Search And Send
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Now to the Search View which can be found in the Search And Send drop-down located in the nav.
 
-### Analyzing the Bundle Size
+In this view, you can look up any BTC-TestNet Public Address.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If the address typed in can't be found an error message is prompted. 
+<!-- Demonstrate ( where is the error ) -->
 
-### Making a Progressive Web App
+Otherwise, a details page is generated.
+<!-- Demonstrate -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If the given address already exists in the database, details will be updated every thirty minutes otherwise details for a given address are fetched and stored in the database.
 
-### Advanced Configuration
+If you don't want to wait for details to be updated, you can manually click the update button located below MIN PASSED SINCE LAST UPDATE.
+<!-- Demonstrate -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Lastly, to make a transaction you will find a div ( div is a box-like object ) below the search field and above the details, there you can select the wallet address you want to make a transaction from, and enter the amount you want to send (Your Amount / (10^8) = Amount In BTC). 
 
-### Deployment
+The amount to send has to be greater than 0 and less than or equal to a hundred million. 
+<!-- (what is the equivalence) equvalent to 1 BTC -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The wallet address you are sending to and the address you are sending from is already verified to exist, so an error may occur for three reasons when making a transaction.
 
-### `npm run build` fails to minify
+1) You have made more than three requests per second
+2) You don't have enough BTC to send
+3) You don't have enough to send and cover fees
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
+Other than that you should receive a success message.
+
+While picking a certain address to make a transaction from, you will find the balance of that
+particular address below the label 'Inputs Address (Sending From):'. This balance is updated every minute. Please leave time interval of a minimum of 1 sec when going from one address to another address. This will prevent making more than 3 request per seocen to the API and being unable to retreive data for an unknown amount of time.
+
+<!-- Demonstrate A transaction  -->
