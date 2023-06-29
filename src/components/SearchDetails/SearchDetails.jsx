@@ -80,7 +80,7 @@ export default class SearchDetails extends Component {
     if (this.state.submittedTransaction) {
       await this.setState({
         submittedTransaction: false,
-        amntToSend: 1,
+        amntToSend: 0,
         success: null,
       });
     } else {
@@ -118,7 +118,6 @@ export default class SearchDetails extends Component {
         // to a user to "Transacion Succeeded Update Below To See Latest Updates"
         await this.setState({
           submittedTransaction: true,
-          amntToSend: 1,
           success: "Transacion Succeeded Update Below To See Latest Updates",
         });
       }
